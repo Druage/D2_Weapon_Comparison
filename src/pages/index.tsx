@@ -1,7 +1,7 @@
 import Header from "../components/Header";
 import WeaponList from "../components/WeaponList";
 import ComparisonList from "../components/ComparisonList";
-import {Close, Content, Dialog as DialogRoot, DialogPortal, Overlay} from "@radix-ui/react-dialog";
+import {Dialog as DialogRoot} from "@radix-ui/react-dialog";
 import {useState} from "react";
 import AddWeaponDialog from "../components/AddWeaponDialog";
 
