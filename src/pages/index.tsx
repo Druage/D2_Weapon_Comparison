@@ -12,7 +12,7 @@ export default function Home() {
     const PageLayout = ({children}: any) => <DialogRoot open={isAddWeaponDialogOpen}
                                                         onOpenChange={(open) => setIsAddWeaponDialogOpen(open)}>
         <div
-            className={"_page-layout flex flex-col min-h-screen min-w-screen h-auto max-w-8xl mx-auto"}>
+            className={"_page-layout flex flex-col min-h-screen min-w-screen h-auto max-w-7xl mx-auto"}>
             {children}
         </div>
     </DialogRoot>
