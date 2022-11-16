@@ -1,5 +1,6 @@
 import _ from "lodash";
-import Weapon from "./Weapon";
+import WeaponItem from "./WeaponItem";
+import {FAKE_WEAPONS_TO_TEST} from "../data/data";
 
 export default function ComparisonList() {
 
@@ -7,7 +8,14 @@ export default function ComparisonList() {
         <h1 className={"text-center mb-8 text-2xl"}>RESULTS</h1>
 
         <div className={"flex flex-col gap-4"}>
-            {_.range(10).map((it: number) => <Weapon key={it.toString()} simplified={false} name={`WEAPON-${it}`}/>)}
+            {FAKE_WEAPONS_TO_TEST.map((it, index) => <WeaponItem key={index}
+                                                                 simplified={false}
+                                                                 name={it.name}
+                                                                 low={it.low}
+                                                                 high={it.high}
+                                                                 ds={it.ds}
+                                                                 undeadED={it.undeadED}
+                                                                 demonED={it.demonED}/>)}
         </div>
     </div>
 }

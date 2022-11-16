@@ -1,6 +1,6 @@
-import _ from "lodash"
-import Weapon from "./Weapon";
+import WeaponItem from "./WeaponItem";
 import {Trigger} from "@radix-ui/react-dialog";
+import {FAKE_WEAPONS_TO_TEST} from "../data/data";
 
 export default function WeaponList() {
 
@@ -18,7 +18,12 @@ export default function WeaponList() {
             <AddWeaponButton/>
 
             <div className={"flex flex-col gap-4"}>
-                {_.range(10).map((it: number) => <Weapon key={it.toString()} simplified={true} name={`WEAPON-${it}`}/>)}
+                {FAKE_WEAPONS_TO_TEST.map((it, index) => <WeaponItem key={index}
+                                                                     simplified={true}
+                                                                     name={it.name}
+                                                                     low={it.low}
+                                                                     high={it.high}
+                                                                     ds={it.ds}/>)}
             </div>
         </div>
 

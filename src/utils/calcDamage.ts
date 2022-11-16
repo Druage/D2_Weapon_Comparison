@@ -1,11 +1,4 @@
-interface WPN {
-    name: string;
-    low: number;
-    high: number;
-    ds: number;
-    undeadED?: number;
-    demonED?: number;
-}
+import {Weapon} from "../types/Weapon";
 
 function calcDoubleDamageChance(critChance: number, deadlyStrikeChance: number) {
     return critChance + ((1 - critChance / 100) * deadlyStrikeChance)
@@ -22,7 +15,7 @@ function calculateTotalDamage(weaponDamage: number, skillWeaponDamagePercentage:
 }
 
 
-function calcEnhancedDamage(weapon: WPN, skillWeaponDamagePercentage: number, enhancedDamageSources: number[], baseCriticalStrikeChance: number, baseDeadlyStrikeChance: number) {
+function calcEnhancedDamage(weapon: Weapon, skillWeaponDamagePercentage: number, enhancedDamageSources: number[], baseCriticalStrikeChance: number, baseDeadlyStrikeChance: number) {
     const realChanceForDoubleDmg = calcDoubleDamageChance(baseCriticalStrikeChance, baseDeadlyStrikeChance + weapon.ds)
 
     const lowWithED = calculateTotalDamage(weapon.low, skillWeaponDamagePercentage, enhancedDamageSources);
@@ -32,7 +25,7 @@ function calcEnhancedDamage(weapon: WPN, skillWeaponDamagePercentage: number, en
     return {lowWithED, highWithED, avgWithED, avgWithDoubleDamageChanceWithED};
 }
 
-export function calcDmgStats(weapon: WPN, enhancedDamageSources: number[], skillWeaponDamagePercentage: number, baseCriticalStrikeChance: number, baseDeadlyStrikeChance: number, highestDmgWeapon?: WPN) {
+export function calcDmgStats(weapon: Weapon, enhancedDamageSources: number[], skillWeaponDamagePercentage: number, baseCriticalStrikeChance: number, baseDeadlyStrikeChance: number, highestDmgWeapon?: Weapon) {
     const realChanceForDoubleDmg = calcDoubleDamageChance(baseCriticalStrikeChance, baseDeadlyStrikeChance + weapon.ds)
 
     const enhancedDamageValues = calcEnhancedDamage(weapon, skillWeaponDamagePercentage, enhancedDamageSources, baseCriticalStrikeChance, baseDeadlyStrikeChance);
@@ -114,7 +107,7 @@ export function calcDmgStats(weapon: WPN, enhancedDamageSources: number[], skill
 
 export function test_dmg() {
 
-    const weaponsToTest = [
+    const weaponsToTest: Weapon[] = [
         {name: "Nats Claw (Max Dmg + Skull)", low: 120, high: 249, ds: 0, undeadED: 200, demonED: 200},
         {name: "Nats Claw (Max Dmg + Lo)", low: 120, high: 249, ds: 20, undeadED: 200, demonED: 200},
         {name: "Nats Claw (Max Dmg + Ohm)", low: 140, high: 274.5, ds: 0, undeadED: 200, demonED: 200},
