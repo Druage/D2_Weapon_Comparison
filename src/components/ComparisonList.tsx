@@ -4,14 +4,25 @@ import {FAKE_WEAPONS_TO_TEST} from "../data/data";
 
 export default function ComparisonList() {
 
-    return <div className={"absolute top-0 bottom-0 right-0 left-80 bg-yellow-500 p-8 overflow-scroll"}>
-
-        <div className={"flex flex-row justify-between items-center mb-8"}>
-            <h1 className={"text-2xl"}>RESULTS</h1>
-            <button className={"h-full bg-white py-4 px-12 text-lg"}>Compare</button>
+    const CompareHeader = () => <div
+        className={"flex flex-row justify-between items-center bg-[#2C2C2C] p-4 border-y-4 border-[#4B4B4B]"}>
+        <button
+            className={"h-full bg-white py-2 px-16 text-xl bg-[#272020] text-white font-bold text-xl border-4 border-black flex items-center justify-center"}>Compare
+            Weapons
+        </button>
+        <div className={"flex flex-row gap-4"}>
+            {_.range(3).map(it => <div className={"w-28 h-10 bg-white"}/>)}
         </div>
 
-        <div className={"flex flex-col gap-4"}>
+    </div>
+
+    return <div className={"absolute top-0 bottom-0 right-0 left-80 bg-[#252525] overflow-y-scroll"}>
+
+        <CompareHeader/>
+
+        <div className={"flex flex-col items-center gap-4 py-8 px-32"}>
+
+            <h1 className={"text-3xl font-bold text-white mb-4"}>Results</h1>
             {FAKE_WEAPONS_TO_TEST.map((it, index) => <WeaponItem key={index}
                                                                  simplified={false}
                                                                  name={it.name}
