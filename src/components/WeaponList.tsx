@@ -5,7 +5,7 @@ import {FAKE_WEAPONS_TO_TEST} from "../data/data";
 export default function WeaponList() {
 
     const CompareButton = () => <Trigger
-        className={"absolute bottom-0 left-0 right-0 bg-purple-400 h-20 flex justify-center items-center border-8 border-[#383838] bg-[#B4B4B4] text-black text-2xl font-bold"}>Add Weapon</Trigger>
+        className={"absolute bottom-0 left-0 right-0 w-full bg-purple-400 h-20 flex justify-center items-center border-8 border-[#383838] bg-[#B4B4B4] text-black text-2xl font-bold"}>Add Weapon</Trigger>
 
     return <div className={"absolute left-0 top-0 bottom-0 bg-[#616161] w-96 z-10"}>
 
