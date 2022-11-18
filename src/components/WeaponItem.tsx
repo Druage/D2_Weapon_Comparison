@@ -6,7 +6,7 @@ interface Props {
 
 export default function WeaponItem({simplified, name, low, high, ds, undeadED, demonED}: Props & Weapon) {
 
-    const SimplifiedVersion = () => <div className={"w-full bg-blue-800"}>
+    const SimplifiedVersion = () => <div className={"w-full bg-[#B0B0B0]"}>
         <div>{name}</div>
         <span>DAMAGE: {low}</span>-<span>{high}</span>
     </div>;

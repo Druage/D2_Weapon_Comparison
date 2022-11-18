@@ -24,7 +24,7 @@ export default function Home() {
 
             <Header/>
 
-            <div className={"flex-1 relative "}>
+            <div className={"flex-1 relative"}>
                 <WeaponList/>
 
                 <ComparisonList/>
