@@ -14,9 +14,16 @@ export default function WeaponItem({
   demonED,
 }: Props & Weapon) {
   const SimplifiedVersion = () => (
-    <div className={"w-full bg-[#B0B0B0]"}>
+    <div className={"w-full bg-[#B0B0B0] p-1 text-center"}>
       <div>{name}</div>
-      <span>DAMAGE: {low}</span>-<span>{high}</span>
+
+      <div className={"m-2"}>
+        {low} to {high}
+      </div>
+      <ul className={"mt-2 text-xs"}>
+        {undeadED && <li>+ {undeadED}% Undead Damage</li>}
+        {demonED && <li>+ {demonED}% Demon Damage</li>}
+      </ul>
     </div>
   );
 

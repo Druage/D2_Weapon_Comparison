@@ -17,8 +17,8 @@ export default function ComparisonList() {
                 Compare Weapons
             </button>
             <div className={"flex flex-row gap-4"}>
-                {_.range(3).map(() => (
-                    <div className={"h-10 w-28 bg-white"}/>
+                {_.range(3).map((it) => (
+                    <div key={it} className={"h-10 w-28 bg-white"}/>
                 ))}
             </div>
         </div>

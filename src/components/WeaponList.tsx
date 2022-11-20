@@ -15,7 +15,11 @@ export default function WeaponList() {
 
     return (
         <div className={"absolute left-0 top-0 bottom-0 z-10 w-96 bg-[#616161]"}>
-            <div className={"_scroll-area absolute inset-0 overflow-y-auto p-8"}>
+            <div
+                className={
+                    "_scroll-area absolute top-0 right-0 left-0 bottom-20 overflow-y-auto p-4"
+                }
+            >
                 <div className={"grid grid-cols-2 gap-4"}>
                     {FAKE_WEAPONS_TO_TEST.map((it, index) => (
                         <WeaponItem
@@ -25,6 +29,8 @@ export default function WeaponList() {
                             low={it.low}
                             high={it.high}
                             ds={it.ds}
+                            undeadED={it.undeadED}
+                            demonED={it.demonED}
                         />
                     ))}
                 </div>
