@@ -43,7 +43,7 @@ export default function AddWeaponDialog() {
             <Overlay className={"fixed inset-0 bg-gray-900 opacity-70 z-50"}/>
             <Content
                 className={
-                    "fixed inset-0 z-50 m-auto h-fit w-96 border-4 border-[#929292] bg-white"
+                    "fixed inset-0 z-50 m-auto h-fit w-96 border-4 border-[#929292] bg-white scale-150"
                 }
             >
                 <Form/>
