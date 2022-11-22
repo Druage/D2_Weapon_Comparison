@@ -1,8 +1,11 @@
 import WeaponItem from "./WeaponItem";
-import {FAKE_WEAPONS_TO_TEST} from "../data/data";
 import _ from "lodash";
+import {useGlobalState} from "../state/useGlobalState";
 
 export default function ComparisonList() {
+
+    const weapons = useGlobalState((state) => state.weapons)
+
     const CompareHeader = () => (
         <div
             className={
@@ -48,14 +51,14 @@ export default function ComparisonList() {
                         ))}
                     </div>
                 </div>
-                {FAKE_WEAPONS_TO_TEST.map((it, index) => (
+                {weapons.map((it, index) => (
                     <WeaponItem
                         key={index}
                         simplified={false}
                         name={it.name}
                         low={it.low}
                         high={it.high}
-                        ds={it.ds}
+                        deadlyStrike={it.deadlyStrike}
                         undeadED={it.undeadED}
                         demonED={it.demonED}
                     />

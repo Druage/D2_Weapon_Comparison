@@ -1,8 +1,10 @@
 import WeaponItem from "./WeaponItem";
 import {Trigger} from "@radix-ui/react-dialog";
-import {FAKE_WEAPONS_TO_TEST} from "../data/data";
+import {useGlobalState} from "../state/useGlobalState";
 
 export default function WeaponList() {
+    const weapons = useGlobalState((state) => state.weapons);
+
     const CompareButton = () => (
         <Trigger
             className={
@@ -21,14 +23,14 @@ export default function WeaponList() {
                 }
             >
                 <div className={"grid grid-cols-2 gap-4"}>
-                    {FAKE_WEAPONS_TO_TEST.map((it, index) => (
+                    {weapons.map((it, index) => (
                         <WeaponItem
                             key={index}
                             simplified={true}
                             name={it.name}
                             low={it.low}
                             high={it.high}
-                            ds={it.ds}
+                            deadlyStrike={it.deadlyStrike}
                             undeadED={it.undeadED}
                             demonED={it.demonED}
                         />

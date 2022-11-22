@@ -9,7 +9,7 @@ export default function WeaponItem({
   name,
   low,
   high,
-  ds,
+  deadlyStrike,
   undeadED,
   demonED,
 }: Props & Weapon) {
@@ -31,7 +31,7 @@ export default function WeaponItem({
     <div className={"h-44 w-full bg-blue-800"}>
       <div>{name}</div>
       <span>DAMAGE: {low}</span>-<span>{high}</span>
-      <div>DS: {ds}</div>
+      <div>DS: {deadlyStrike}</div>
     </div>
   );
 
