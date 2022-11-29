@@ -6,7 +6,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "prettier": "prettier --check '**/*.{scss,tsx,ts,js}'",
+    "prettier:fix": "prettier --write '**/*.{scss,tsx,ts,js}'"
   },
   "dependencies": {
     "@radix-ui/react-dialog": "^1.0.2",
@@ -29,8 +31,12 @@
     "@types/lodash": "^4.14.189",
     "autoprefixer": "^10.4.13",
     "postcss": "^8.4.19",
-    "prettier": "^2.7.1",
+    "pre-push": "^0.1.4",
+    "prettier": "^2.8.0",
     "prettier-plugin-tailwindcss": "^0.1.13",
     "tailwindcss": "^3.2.4"
-  }
+  },
+  "pre-push": [
+    "prettier"
+  ]
 }

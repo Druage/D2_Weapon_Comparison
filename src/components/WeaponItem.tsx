@@ -61,7 +61,21 @@ export default function WeaponItem({
         "flex h-72 w-full items-center justify-center gap-8 bg-blue-800 p-4"
       }
     >
-      <div className={"h-5/6 w-40 bg-yellow-200"}></div>
+      <div
+        className={
+          "flex h-5/6 w-40 flex-col items-center justify-start gap-4 bg-yellow-200 px-2 py-4 text-center"
+        }
+      >
+        <div className={"text-base"}>{name}</div>
+
+        <div>
+          {low} to {high}
+        </div>
+        <ul className={"text-xs"}>
+          {undeadED && <li>+ {undeadED}% Undead Damage</li>}
+          {demonED && <li>+ {demonED}% Demon Damage</li>}
+        </ul>
+      </div>
 
       <div className={"flex h-full flex-1"}>
         <FullDamageResult
