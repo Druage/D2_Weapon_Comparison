@@ -21,13 +21,6 @@ export default function ComparisonList() {
       >
         Compare Weapons
       </button>
-
-      <label className={"relative w-36"}>
-        <span className={"absolute -top-6 text-sm font-bold text-white"}>
-          Critical Chance %
-        </span>
-        <input className={"h-10 w-full bg-white"} type={"number"} />
-      </label>
     </div>
   );
 

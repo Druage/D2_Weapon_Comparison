@@ -302,8 +302,7 @@ export function test_dmg() {
 
   // Sins increase ED from Dex & Str
   // Barbs increase ED from Str
-  //
-
+  
   const baseCriticalStrikeChance = 31;
   const baseDeadlyStrikeChance = 15 + 15 + 36;
   let enhancedDamageSources = [145, 173, 258, 131, 200];
