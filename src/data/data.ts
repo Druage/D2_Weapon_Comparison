@@ -1,4 +1,5 @@
 import { Weapon } from "../types/Weapon";
+import { Character } from "../types/Character";
 
 export const FAKE_WEAPONS_TO_TEST: Weapon[] = [
   {
@@ -81,4 +82,14 @@ export const FAKE_WEAPONS_TO_TEST: Weapon[] = [
   },
 
   { name: "Fury Claw", low: 120, high: 160, deadlyStrike: 33 },
+];
+
+export const PLAYABLE_CHARACTERS: Character[] = [
+  Character.DRUID,
+  Character.AMAZON,
+  Character.ASSASSIN,
+  Character.NECROMANCER,
+  Character.BARBARIAN,
+  Character.PALADIN,
+  Character.SORCERESS,
 ];

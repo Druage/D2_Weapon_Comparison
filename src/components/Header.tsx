@@ -1,25 +1,59 @@
+import { PLAYABLE_CHARACTERS } from "../data/data";
+import { useGlobalState } from "../state/useGlobalState";
+import { Character } from "../types/Character";
+
 export default function Header() {
+  const setCharacter = useGlobalState((state) => state.setCharacter);
+  const setCharacterStrength = useGlobalState(
+    (state) => state.setCharacterStrength
+  );
+  const setCharacterDexterity = useGlobalState(
+    (state) => state.setCharacterDexterity
+  );
+
   const CharacterInfo = () => (
     <div className={"flex flex-1 items-center justify-end gap-6"}>
       <label className={"relative w-32"}>
         <span className={"absolute -top-6 text-sm font-bold text-white"}>
           Character
         </span>
-        <input className={"h-10 w-full bg-white"} type={"text"} />
+
+        <select
+          className={"h-10 w-full"}
+          onChange={(event) => setCharacter(event.target.value as Character)}
+        >
+          {PLAYABLE_CHARACTERS.map((it) => (
+            <option value={it} key={it}>
+              {it}
+            </option>
+          ))}
+        </select>
       </label>
 
       <label className={"relative w-20"}>
         <span className={"absolute -top-6 text-sm font-bold text-white"}>
           Strength
         </span>
-        <input className={"h-10 w-full bg-white"} type={"number"} />
+        <input
+          className={"h-10 w-full bg-white"}
+          type={"number"}
+          onChange={(event) =>
+            setCharacterStrength(Number.parseInt(event.target.value))
+          }
+        />
       </label>
 
       <label className={"relative w-20"}>
         <span className={"absolute -top-6 text-sm font-bold text-white"}>
           Dexterity
         </span>
-        <input className={"h-10 w-full bg-white"} type={"number"} />
+        <input
+          className={"h-10 w-full bg-white"}
+          type={"number"}
+          onChange={(event) =>
+            setCharacterDexterity(Number.parseInt(event.target.value))
+          }
+        />
       </label>
 
       <label className={"relative w-32"}>
