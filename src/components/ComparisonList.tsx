@@ -1,6 +1,7 @@
 import WeaponItem from "./WeaponItem";
 import _ from "lodash";
 import { useGlobalState } from "../state/useGlobalState";
+import { AddWeaponButton } from "./AddWeaponButton";
 
 export default function ComparisonList() {
   const weapons = useGlobalState((state) => state.weapons);
@@ -11,6 +12,8 @@ export default function ComparisonList() {
         "flex flex-row items-center justify-between border-y-4 border-[#4B4B4B] bg-[#2C2C2C] px-6 py-8"
       }
     >
+      <AddWeaponButton />
+
       <button
         className={
           "flex h-full items-center justify-center border-4 border-black bg-white bg-[#272020] py-2 px-16 text-xl text-xl font-bold text-white"
