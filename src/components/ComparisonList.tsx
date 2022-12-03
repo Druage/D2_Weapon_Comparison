@@ -27,7 +27,7 @@ export default function ComparisonList() {
   return (
     <div
       className={
-        "absolute top-0 bottom-0 right-0 left-96 overflow-y-auto bg-[#252525]"
+        "absolute top-0 bottom-0 right-0 left-0 overflow-y-auto bg-[#252525]"
       }
     >
       <CompareHeader />

@@ -31,8 +31,6 @@ export default function Home() {
       <Header />
 
       <div className={"relative flex-1"}>
-        <WeaponList />
-
         <ComparisonList />
       </div>
     </PageLayout>
