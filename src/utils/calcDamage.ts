@@ -17,9 +17,15 @@ function calculateTotalDamage(
   skillWeaponDamagePercentage: number,
   offWeaponEDList: number[]
 ) {
-  const totalOffWeaponED = offWeaponEDList.reduce(
-    (partialSum, ed) => partialSum + ed
-  );
+  let totalOffWeaponED = 0;
+  if (offWeaponEDList.length >= 2) {
+    totalOffWeaponED = offWeaponEDList.reduce(
+      (partialSum, ed) => partialSum + ed
+    );
+  } else if (offWeaponEDList.length == 1) {
+    totalOffWeaponED = offWeaponEDList[0];
+  }
+
   return (
     weaponDamage +
     weaponDamage * skillWeaponDamagePercentage * (totalOffWeaponED / 100)
@@ -209,6 +215,31 @@ export function calcDmgStats(
         ##########################################################
         `);
   }
+}
+
+export function sortWeapons(
+  baseCriticalStrikeChance: number,
+  baseDeadlyStrikeChance: number,
+  weaponA: Weapon,
+  weaponB: Weapon
+) {
+  const weaponDmgRange = calcAvgDmg(weaponA.low, weaponA.high);
+  const realChanceForDoubleDmg = calcDoubleDamageChance(
+    baseCriticalStrikeChance,
+    baseDeadlyStrikeChance + weaponA.deadlyStrike
+  );
+  const effectiveDmgA =
+    weaponDmgRange + weaponDmgRange * (realChanceForDoubleDmg / 100);
+
+  const weaponDmgRangeB = calcAvgDmg(weaponB.low, weaponB.high);
+  const realChanceForDoubleDmgB = calcDoubleDamageChance(
+    baseCriticalStrikeChance,
+    baseDeadlyStrikeChance + weaponB.deadlyStrike
+  );
+  const effectiveDmgB =
+    weaponDmgRangeB + weaponDmgRangeB * (realChanceForDoubleDmgB / 100);
+
+  return effectiveDmgB - effectiveDmgA;
 }
 
 export function test_dmg() {

@@ -7,29 +7,39 @@ interface State {
   character: Character;
   characterStrength: number | undefined;
   characterDexterity: number | undefined;
+  characterSkillWeaponDamagePercentage: number | undefined;
+  characterOtherEnhancedDamageSources: number[];
+
+  characterDeadlyStrikeChange: number | undefined;
 
   weapons: Weapon[];
-  criticalStrikeChance: string | undefined;
+  characterCriticalStrikeChance: number | undefined;
 }
 
 interface Actions {
   setCharacter: (character: Character) => void;
   setCharacterStrength: (strength: number) => void;
   setCharacterDexterity: (dexterity: number) => void;
+  setCharacterSkillWeaponDamagePercentage: (percentage: number) => void;
+  setCharacterOtherEnhancedDamageSources: (sources: number[]) => void;
 
   addWeapon: (weapon: Weapon) => any;
-  setCriticalStrikeChance: (chance: string) => void;
+  setCharacterCriticalStrikeChance: (chance: number) => void;
+  setDeadlyStrikeChance: (chance: number) => void;
 }
 
 export const useGlobalState = create<State & Actions>((set) => ({
   weapons: [...FAKE_WEAPONS_TO_TEST],
   addWeapon: (weapon: Weapon) =>
     set((state) => ({ weapons: [...state.weapons, weapon] })),
-  criticalStrikeChance: undefined,
+  characterCriticalStrikeChance: undefined,
 
   character: Character.UNKNOWN,
   characterStrength: undefined,
   characterDexterity: undefined,
+  characterSkillWeaponDamagePercentage: undefined,
+  characterOtherEnhancedDamageSources: [],
+  characterDeadlyStrikeChange: undefined,
 
   setCharacter: (character: Character) => set(() => ({ character: character })),
   setCharacterStrength: (strength: number) =>
@@ -37,6 +47,15 @@ export const useGlobalState = create<State & Actions>((set) => ({
   setCharacterDexterity: (dexterity: number) =>
     set(() => ({ characterDexterity: dexterity })),
 
-  setCriticalStrikeChance: (chance: string) =>
-    set(() => ({ criticalStrikeChance: chance })),
+  setCharacterCriticalStrikeChance: (chance: number) =>
+    set(() => ({ characterCriticalStrikeChance: chance })),
+
+  setDeadlyStrikeChance: (chance: number) =>
+    set(() => ({ characterDeadlyStrikeChange: chance })),
+
+  setCharacterSkillWeaponDamagePercentage: (percentage: number) =>
+    set(() => ({ characterSkillWeaponDamagePercentage: percentage })),
+
+  setCharacterOtherEnhancedDamageSources: (sources: number[]) =>
+    set(() => ({ characterOtherEnhancedDamageSources: sources })),
 }));
