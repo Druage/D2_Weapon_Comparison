@@ -15,16 +15,7 @@ export default function WeaponList() {
       >
         <div className={"grid grid-cols-2 gap-4"}>
           {weapons.map((it, index) => (
-            <WeaponItem
-              key={index}
-              simplified={true}
-              name={it.name}
-              low={it.low}
-              high={it.high}
-              deadlyStrike={it.deadlyStrike}
-              undeadED={it.undeadED}
-              demonED={it.demonED}
-            />
+            <WeaponItem key={index} simplified={true} weapon={it} />
           ))}
         </div>
       </div>
