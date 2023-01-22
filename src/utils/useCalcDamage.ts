@@ -78,6 +78,7 @@ export function useCalcDamage(
           totalHighDmgWithUndeadED,
           realChanceForDoubleDmg
         ),
+        realChanceForDoubleDmg,
       ];
     }
 

@@ -69,14 +69,18 @@ export default function WeaponItem({ simplified, weapon }: Props) {
     </div>
   );
 
-  const [totalAvgDamage, totalAvgDmgWithDemonsED, totalAvgDamageForUndead] =
-    useCalcDamage(
-      weapon,
-      characterSkillWeaponDamagePercentage,
-      characterOtherEnhancedDamageSources,
-      characterCriticalStrikeChance,
-      characterDeadlyStrikeChance
-    );
+  const [
+    totalAvgDamage,
+    totalAvgDmgWithDemonsED,
+    totalAvgDamageForUndead,
+    realChanceForDoubleDmg,
+  ] = useCalcDamage(
+    weapon,
+    characterSkillWeaponDamagePercentage,
+    characterOtherEnhancedDamageSources,
+    characterCriticalStrikeChance,
+    characterDeadlyStrikeChance
+  );
 
   const ExpandedVersion = () => (
     <div
@@ -106,21 +110,21 @@ export default function WeaponItem({ simplified, weapon }: Props) {
           heading={"vs. Demons"}
           totalAvgDamage={totalAvgDmgWithDemonsED?.toFixed(2)}
           totalEnhancedDamage={"600"}
-          doubleDamageChance={"20"}
+          doubleDamageChance={realChanceForDoubleDmg}
         />
         <FullDamageResult
           className={"bg-black text-white"}
           heading={"vs. Undead"}
           totalAvgDamage={totalAvgDamageForUndead?.toFixed(2)}
           totalEnhancedDamage={"600"}
-          doubleDamageChance={"20"}
+          doubleDamageChance={realChanceForDoubleDmg}
         />
         <FullDamageResult
           className={"bg-white"}
           heading={"vs. Normal"}
           totalAvgDamage={totalAvgDamage?.toFixed(2)}
           totalEnhancedDamage={"400"}
-          doubleDamageChance={"20"}
+          doubleDamageChance={realChanceForDoubleDmg}
         />
       </div>
     </div>
