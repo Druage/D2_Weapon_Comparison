@@ -80,6 +80,13 @@ export default function WeaponItem({ simplified, weapon }: Props) {
 
       <div className={"flex h-full flex-1"}>
         <FullDamageResult
+          className={"bg-white"}
+          heading={"vs. Normal"}
+          totalAvgDamage={totalAvgDamage?.toFixed(2)}
+          enhancedDamageValues={[...characterOtherEnhancedDamageSources]}
+          chanceForDoubleDamage={realChanceForDoubleDmg}
+        />
+        <FullDamageResult
           className={"bg-red-900 text-white"}
           heading={"vs. Demons"}
           totalAvgDamage={totalAvgDmgWithDemonsED?.toFixed(2)}
@@ -97,13 +104,6 @@ export default function WeaponItem({ simplified, weapon }: Props) {
             ...characterOtherEnhancedDamageSources,
             weapon.undeadED ?? 0,
           ]}
-          chanceForDoubleDamage={realChanceForDoubleDmg}
-        />
-        <FullDamageResult
-          className={"bg-white"}
-          heading={"vs. Normal"}
-          totalAvgDamage={totalAvgDamage?.toFixed(2)}
-          enhancedDamageValues={[...characterOtherEnhancedDamageSources]}
           chanceForDoubleDamage={realChanceForDoubleDmg}
         />
       </div>
