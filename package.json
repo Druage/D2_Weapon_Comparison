@@ -6,6 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
+    "test": "vitest",
+    "test:coverage": "vitest run --coverage",
     "lint": "next lint",
     "prettier": "prettier --check '**/*.{scss,tsx,ts,js}'",
     "prettier:fix": "prettier --write '**/*.{scss,tsx,ts,js}'"
@@ -29,14 +31,17 @@
   },
   "devDependencies": {
     "@types/lodash": "^4.14.189",
+    "@vitest/coverage-c8": "^0.27.2",
     "autoprefixer": "^10.4.13",
     "postcss": "^8.4.19",
     "pre-push": "^0.1.4",
     "prettier": "^2.8.0",
     "prettier-plugin-tailwindcss": "^0.1.13",
-    "tailwindcss": "^3.2.4"
+    "tailwindcss": "^3.2.4",
+    "vitest": "^0.27.2"
   },
   "pre-push": [
-    "prettier"
+    "prettier",
+    "test:coverage"
   ]
 }

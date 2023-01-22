@@ -1,18 +1,28 @@
 import { Weapon } from "../types/Weapon";
+import { number } from "prop-types";
 
-function calcDoubleDamageChance(
+export function calcDoubleDamageChance(
   critChance: number,
   deadlyStrikeChance: number
 ) {
   return critChance + (1 - critChance / 100) * deadlyStrikeChance;
 }
 
-function calcAvgDmg(low: number, high: number) {
+export function calcAvgDmg(low: number, high: number) {
   return (low + high) / 2;
 }
 
-//383 + ((383 * 1.00 ) *( ( 0 + 155 + 298 + 106) / 100))
-function calculateTotalDamage(
+export function calcAvgDamageWithDoubleDamageChance(
+  low: number,
+  high: number,
+  chanceForDoubleDamage: number
+) {
+  const avg = calcAvgDmg(low, high);
+  return avg + avg * (chanceForDoubleDamage / 100);
+}
+
+//383 + ((383 * 1.00 ) * ( ( 0 + 155 + 298 + 106) / 100))
+export function calculateTotalDamage(
   weaponDamage: number,
   skillWeaponDamagePercentage: number,
   offWeaponEDList: number[]
@@ -26,13 +36,17 @@ function calculateTotalDamage(
     totalOffWeaponED = offWeaponEDList[0];
   }
 
-  return (
-    weaponDamage +
-    weaponDamage * skillWeaponDamagePercentage * (totalOffWeaponED / 100)
-  );
+  if (totalOffWeaponED == 0) {
+    return weaponDamage * skillWeaponDamagePercentage;
+  } else {
+    return (
+      weaponDamage * skillWeaponDamagePercentage * (totalOffWeaponED / 100) +
+      weaponDamage * skillWeaponDamagePercentage
+    );
+  }
 }
 
-function calcEnhancedDamage(
+export function calcEnhancedDamage(
   weapon: Weapon,
   skillWeaponDamagePercentage: number,
   enhancedDamageSources: number[],
@@ -217,7 +231,7 @@ export function calcDmgStats(
   }
 }
 
-export function sortWeapons(
+export function sortWeaponsHighToLowDamage(
   baseCriticalStrikeChance: number,
   baseDeadlyStrikeChance: number,
   weaponA: Weapon,

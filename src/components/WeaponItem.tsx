@@ -1,29 +1,43 @@
 import { Weapon } from "../types/Weapon";
 import clsx from "clsx";
+import {
+  calcAvgDmg,
+  calcDoubleDamageChance,
+  calcEnhancedDamage,
+  calculateTotalDamage,
+} from "../utils/calcDamage";
+import { useGlobalState } from "../state/useGlobalState";
+import { useMemo } from "react";
+import { useCalcDamage } from "../utils/useCalcDamage";
 
 interface Props {
   simplified: boolean;
+  weapon: Weapon;
 }
 
-export default function WeaponItem({
-  simplified,
-  name,
-  low,
-  high,
-  deadlyStrike,
-  undeadED,
-  demonED,
-}: Props & Weapon) {
+export default function WeaponItem({ simplified, weapon }: Props) {
+  const [
+    characterCriticalStrikeChance,
+    characterDeadlyStrikeChance,
+    characterSkillWeaponDamagePercentage,
+    characterOtherEnhancedDamageSources,
+  ] = useGlobalState((state) => [
+    state.characterCriticalStrikeChance,
+    state.characterDeadlyStrikeChange,
+    state.characterSkillWeaponDamagePercentage,
+    state.characterOtherEnhancedDamageSources,
+  ]);
+
   const SimplifiedVersion = () => (
     <div className={"w-full bg-[#B0B0B0] p-1 text-center"}>
-      <div>{name}</div>
+      <div>{weapon.name}</div>
 
       <div className={"m-2"}>
-        {low} to {high}
+        {weapon.low} to {weapon.high}
       </div>
       <ul className={"mt-2 text-xs"}>
-        {undeadED && <li>+ {undeadED}% Undead Damage</li>}
-        {demonED && <li>+ {demonED}% Demon Damage</li>}
+        {weapon.undeadED && <li>+ {weapon.undeadED}% Undead Damage</li>}
+        {weapon.demonED && <li>+ {weapon.demonED}% Demon Damage</li>}
       </ul>
     </div>
   );
@@ -55,6 +69,15 @@ export default function WeaponItem({
     </div>
   );
 
+  const [totalAvgDamage, totalAvgDmgWithDemonsED, totalAvgDamageForUndead] =
+    useCalcDamage(
+      weapon,
+      characterSkillWeaponDamagePercentage,
+      characterOtherEnhancedDamageSources,
+      characterCriticalStrikeChance,
+      characterDeadlyStrikeChance
+    );
+
   const ExpandedVersion = () => (
     <div
       className={
@@ -66,14 +89,14 @@ export default function WeaponItem({
           "flex h-5/6 w-40 flex-col items-center justify-start gap-4 bg-yellow-200 px-2 py-4 text-center"
         }
       >
-        <div className={"text-base"}>{name}</div>
+        <div className={"text-base"}>{weapon.name}</div>
 
         <div>
-          {low} to {high}
+          {weapon.low} to {weapon.high}
         </div>
         <ul className={"text-xs"}>
-          {undeadED && <li>+ {undeadED}% Undead Damage</li>}
-          {demonED && <li>+ {demonED}% Demon Damage</li>}
+          {weapon.undeadED && <li>+ {weapon.undeadED}% Undead Damage</li>}
+          {weapon.demonED && <li>+ {weapon.demonED}% Demon Damage</li>}
         </ul>
       </div>
 
@@ -81,21 +104,21 @@ export default function WeaponItem({
         <FullDamageResult
           className={"bg-red-900 text-white"}
           heading={"vs. Demons"}
-          totalAvgDamage={"6664"}
+          totalAvgDamage={totalAvgDmgWithDemonsED?.toFixed(2)}
           totalEnhancedDamage={"600"}
           doubleDamageChance={"20"}
         />
         <FullDamageResult
           className={"bg-black text-white"}
           heading={"vs. Undead"}
-          totalAvgDamage={"6664"}
+          totalAvgDamage={totalAvgDamageForUndead?.toFixed(2)}
           totalEnhancedDamage={"600"}
           doubleDamageChance={"20"}
         />
         <FullDamageResult
           className={"bg-white"}
           heading={"vs. Normal"}
-          totalAvgDamage={"5843"}
+          totalAvgDamage={totalAvgDamage?.toFixed(2)}
           totalEnhancedDamage={"400"}
           doubleDamageChance={"20"}
         />

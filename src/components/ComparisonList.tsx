@@ -3,8 +3,8 @@ import _ from "lodash";
 import { useGlobalState } from "../state/useGlobalState";
 import { AddWeaponButton } from "./AddWeaponButton";
 import { CharacterInfo } from "./CharacterInfo";
-import { useEffect, useMemo } from "react";
-import { calcDmgStats, sortWeapons } from "../utils/calcDamage";
+import { useMemo } from "react";
+import { sortWeaponsHighToLowDamage } from "../utils/calcDamage";
 
 const CompareHeader = () => (
   <div
@@ -37,37 +37,35 @@ export default function ComparisonList() {
       characterDeadlyStrikeChance &&
       characterSkillWeaponDamagePercentage
     ) {
-      const sortedWeapons = weapons.sort((weaponA, weaponB) =>
-        sortWeapons(
+      // const first = highToLowWeapons.shift()!;
+      //
+      // calcDmgStats(
+      //   first,
+      //   characterOtherEnhancedDamageSources,
+      //   characterSkillWeaponDamagePercentage,
+      //   characterCriticalStrikeChance,
+      //   characterDeadlyStrikeChance
+      // );
+      //
+      // highToLowWeapons.forEach((weapon) =>
+      //   calcDmgStats(
+      //     weapon,
+      //     characterOtherEnhancedDamageSources,
+      //     characterSkillWeaponDamagePercentage,
+      //     characterCriticalStrikeChance,
+      //     characterDeadlyStrikeChance,
+      //     first
+      //   )
+      // );
+
+      return weapons.sort((weaponA, weaponB) =>
+        sortWeaponsHighToLowDamage(
           characterCriticalStrikeChance,
           characterDeadlyStrikeChance,
           weaponA,
           weaponB
         )
       );
-
-      const first = sortedWeapons.shift()!;
-
-      calcDmgStats(
-        first,
-        characterOtherEnhancedDamageSources,
-        characterSkillWeaponDamagePercentage,
-        characterCriticalStrikeChance,
-        characterDeadlyStrikeChance
-      );
-
-      sortedWeapons.forEach((weapon) =>
-        calcDmgStats(
-          weapon,
-          characterOtherEnhancedDamageSources,
-          characterSkillWeaponDamagePercentage,
-          characterCriticalStrikeChance,
-          characterDeadlyStrikeChance,
-          first
-        )
-      );
-
-      return sortedWeapons;
     } else {
       return weapons;
     }
@@ -104,16 +102,7 @@ export default function ComparisonList() {
         </div>
 
         {sortedWeapons?.map((it, index) => (
-          <WeaponItem
-            key={index}
-            simplified={false}
-            name={it.name}
-            low={it.low}
-            high={it.high}
-            deadlyStrike={it.deadlyStrike}
-            undeadED={it.undeadED}
-            demonED={it.demonED}
-          />
+          <WeaponItem key={index} simplified={false} weapon={it} />
         ))}
       </div>
     </div>
