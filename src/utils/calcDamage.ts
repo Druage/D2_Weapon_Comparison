@@ -231,6 +231,7 @@ export function calcDmgStats(
 }
 
 export function sortWeaponsHighToLowDamage(
+  character: string,
   baseCriticalStrikeChance: number,
   baseDeadlyStrikeChance: number,
   weaponA: Weapon,
@@ -259,6 +260,7 @@ export function test_dmg() {
   const weaponsToTest: Weapon[] = [
     {
       name: "Nats Claw (Max Dmg + Skull)",
+      type: "melee",
       low: 120,
       high: 249,
       deadlyStrike: 0,
@@ -267,6 +269,7 @@ export function test_dmg() {
     },
     {
       name: "Nats Claw (Max Dmg + Lo)",
+      type: "melee",
       low: 120,
       high: 249,
       deadlyStrike: 20,
@@ -275,6 +278,7 @@ export function test_dmg() {
     },
     {
       name: "Nats Claw (Max Dmg + Ohm)",
+      type: "melee",
       low: 140,
       high: 274.5,
       deadlyStrike: 0,
@@ -283,6 +287,7 @@ export function test_dmg() {
     },
     {
       name: "Nats Claw (Lo, Lo, Ohm)",
+      type: "melee",
       low: 140,
       high: 178.5,
       deadlyStrike: 40,
@@ -291,6 +296,7 @@ export function test_dmg() {
     },
     {
       name: "Nats Claw (Lo, Ohm, Ohm)",
+      type: "melee",
       low: 160,
       high: 204,
       deadlyStrike: 20,
@@ -298,12 +304,37 @@ export function test_dmg() {
       demonED: 200,
     },
 
-    { name: "Bartucs (Lo, Lo, Jah)", low: 97, high: 182, deadlyStrike: 40 },
-    { name: "Bartucs (Max Dmg + Jah)", low: 97, high: 278, deadlyStrike: 0 },
-    { name: "Bartucs (Lo, Ohm, Jah)", low: 109, high: 204, deadlyStrike: 20 },
-    { name: "Bartucs (Ohm, Ohm, Jah)", low: 121, high: 226, deadlyStrike: 0 },
+    {
+      name: "Bartucs (Lo, Lo, Jah)",
+      type: "melee",
+      low: 97,
+      high: 182,
+      deadlyStrike: 40,
+    },
+    {
+      name: "Bartucs (Max Dmg + Jah)",
+      type: "melee",
+      low: 97,
+      high: 278,
+      deadlyStrike: 0,
+    },
+    {
+      name: "Bartucs (Lo, Ohm, Jah)",
+      type: "melee",
+      low: 109,
+      high: 204,
+      deadlyStrike: 20,
+    },
+    {
+      name: "Bartucs (Ohm, Ohm, Jah)",
+      type: "melee",
+      low: 121,
+      high: 226,
+      deadlyStrike: 0,
+    },
     {
       name: "Bartucs (Shael, Shael, Jah)",
+      type: "melee",
       low: 97,
       high: 182,
       deadlyStrike: 0,
@@ -311,37 +342,48 @@ export function test_dmg() {
 
     {
       name: "Jade Talon (Shael, Shael, Jah)",
+      type: "melee",
       low: 114,
       high: 152,
       deadlyStrike: 0,
     },
     {
       name: "Jade Talon (Ohm, Lo, Jah)",
+      type: "melee",
       low: 131.92,
       high: 174.6,
       deadlyStrike: 20,
     },
     {
       name: "Jade Talon (Ohm, Ohm, Jah)",
+      type: "melee",
       low: 148.92,
       high: 197.1,
       deadlyStrike: 0,
     },
-    { name: "Jade Talon (Lo, Lo, Jah)", low: 114, high: 152, deadlyStrike: 40 },
+    {
+      name: "Jade Talon (Lo, Lo, Jah)",
+      type: "melee",
+      low: 114,
+      high: 152,
+      deadlyStrike: 40,
+    },
     {
       name: "Jade Talon (Max Dmg + Jah, [Perfect])",
+      type: "melee",
       low: 114,
       high: 248,
       deadlyStrike: 0,
     },
     {
       name: "Jade Talon (Max Dmg + Jah, [Mine])",
+      type: "melee",
       low: 104,
       high: 234.6,
       deadlyStrike: 0,
     },
 
-    { name: "Fury Claw", low: 120, high: 160, deadlyStrike: 33 },
+    { name: "Fury Claw", type: "melee", low: 120, high: 160, deadlyStrike: 33 },
   ];
 
   // Sins increase ED from Dex & Str

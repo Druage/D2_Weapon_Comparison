@@ -25,12 +25,14 @@ const CompareHeader = () => (
 export default function ComparisonList() {
   const [
     weapons,
+    character,
     characterCriticalStrikeChance,
     characterDeadlyStrikeChance,
     characterSkillWeaponDamagePercentage,
     characterOtherEnhancedDamageSources,
   ] = useGlobalState((state) => [
     state.weapons,
+    state.character,
     state.characterCriticalStrikeChance,
     state.characterDeadlyStrikeChange,
     state.characterSkillWeaponDamagePercentage,
@@ -48,6 +50,7 @@ export default function ComparisonList() {
       if (sortBy === SortBy.Normal) {
         return weapons.sort((weaponA, weaponB) =>
           sortWeaponsHighToLowDamage(
+            character,
             characterCriticalStrikeChance,
             characterDeadlyStrikeChance,
             weaponA,

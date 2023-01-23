@@ -1,5 +1,6 @@
 export interface Weapon {
   name: string;
+  type: "melee" | "ranged";
   low: number;
   high: number;
   deadlyStrike: number;

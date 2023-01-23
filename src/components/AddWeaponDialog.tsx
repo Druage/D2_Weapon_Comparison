@@ -52,6 +52,13 @@ export default function AddWeaponDialog() {
         {...register("name", { required: true })}
       />
 
+      <input
+        placeholder={"Ranged or Melee"}
+        className={"w-full p-2 text-xl"}
+        type={"text"}
+        {...register("name", { required: true })}
+      />
+
       <div className={"flex w-full items-center justify-evenly gap-2"}>
         <input
           placeholder={"Low"}
