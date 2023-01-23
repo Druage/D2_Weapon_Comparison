@@ -82,6 +82,12 @@ export const FAKE_WEAPONS_TO_TEST: Weapon[] = [
   },
 
   { name: "Fury Claw", low: 120, high: 160, deadlyStrike: 33 },
+  {
+    name: "Grief",
+    low: 350,
+    high: 383,
+    deadlyStrike: 20,
+  },
 ];
 
 export const PLAYABLE_CHARACTERS: Character[] = [

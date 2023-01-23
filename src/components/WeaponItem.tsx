@@ -39,6 +39,9 @@ export default function WeaponItem({ simplified, weapon }: Props) {
       <ul className={"mt-2 text-xs"}>
         {weapon.undeadED && <li>+ {weapon.undeadED}% Undead Damage</li>}
         {weapon.demonED && <li>+ {weapon.demonED}% Demon Damage</li>}
+        {weapon.deadlyStrike > 0 && (
+          <li>+ {weapon.deadlyStrike}% Deadly Strike</li>
+        )}
       </ul>
     </div>
   );
@@ -75,6 +78,9 @@ export default function WeaponItem({ simplified, weapon }: Props) {
         <ul className={"text-xs"}>
           {weapon.undeadED && <li>+ {weapon.undeadED}% Undead Damage</li>}
           {weapon.demonED && <li>+ {weapon.demonED}% Demon Damage</li>}
+          {weapon.deadlyStrike > 0 && (
+            <li>+ {weapon.deadlyStrike}% Deadly Strike</li>
+          )}
         </ul>
       </div>
 

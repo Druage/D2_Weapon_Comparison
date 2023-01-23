@@ -1,5 +1,4 @@
 import WeaponItem from "./WeaponItem";
-import _ from "lodash";
 import { useGlobalState } from "../state/useGlobalState";
 import { AddWeaponButton } from "./AddWeaponButton";
 import { CharacterInfo } from "./CharacterInfo";
@@ -37,27 +36,6 @@ export default function ComparisonList() {
       characterDeadlyStrikeChance &&
       characterSkillWeaponDamagePercentage
     ) {
-      // const first = highToLowWeapons.shift()!;
-      //
-      // calcDmgStats(
-      //   first,
-      //   characterOtherEnhancedDamageSources,
-      //   characterSkillWeaponDamagePercentage,
-      //   characterCriticalStrikeChance,
-      //   characterDeadlyStrikeChance
-      // );
-      //
-      // highToLowWeapons.forEach((weapon) =>
-      //   calcDmgStats(
-      //     weapon,
-      //     characterOtherEnhancedDamageSources,
-      //     characterSkillWeaponDamagePercentage,
-      //     characterCriticalStrikeChance,
-      //     characterDeadlyStrikeChance,
-      //     first
-      //   )
-      // );
-
       return weapons.sort((weaponA, weaponB) =>
         sortWeaponsHighToLowDamage(
           characterCriticalStrikeChance,
@@ -75,6 +53,31 @@ export default function ComparisonList() {
     characterSkillWeaponDamagePercentage,
     characterOtherEnhancedDamageSources,
   ]);
+
+  const SortButton = ({ text }: any) => {
+    return (
+      <button
+        className={"flex h-8 w-36 items-center justify-center bg-white"}
+        onClick={() => {}}
+      >
+        <span>{text}</span>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          strokeWidth={1.5}
+          stroke="currentColor"
+          className="h-6 w-6"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            d="M19.5 8.25l-7.5 7.5-7.5-7.5"
+          />
+        </svg>
+      </button>
+    );
+  };
 
   return (
     <div
@@ -95,9 +98,9 @@ export default function ComparisonList() {
           </h1>
 
           <div className={"flex flex-row items-center gap-2"}>
-            {_.range(3).map((it) => (
-              <div key={it} className={"h-8 w-16 bg-white"} />
-            ))}
+            <SortButton text={"vs. Normal"} />
+            <SortButton text={"vs. Demons"} />
+            <SortButton text={"vs. Undead"} />
           </div>
         </div>
 

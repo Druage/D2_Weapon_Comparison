@@ -1,5 +1,4 @@
 import { Weapon } from "../types/Weapon";
-import { number } from "prop-types";
 
 export function calcDoubleDamageChance(
   critChance: number,
