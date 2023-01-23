@@ -1,13 +1,5 @@
 import { Weapon } from "../types/Weapon";
-import clsx from "clsx";
-import {
-  calcAvgDmg,
-  calcDoubleDamageChance,
-  calcEnhancedDamage,
-  calculateTotalDamage,
-} from "../utils/calcDamage";
 import { useGlobalState } from "../state/useGlobalState";
-import { useMemo } from "react";
 import { useCalcDamage } from "../utils/useCalcDamage";
 import { FullDamageResult } from "./FullWeaponDamageResult";
 

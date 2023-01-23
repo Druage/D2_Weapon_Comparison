@@ -2,8 +2,15 @@ import WeaponItem from "./WeaponItem";
 import { useGlobalState } from "../state/useGlobalState";
 import { AddWeaponButton } from "./AddWeaponButton";
 import { CharacterInfo } from "./CharacterInfo";
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 import { sortWeaponsHighToLowDamage } from "../utils/calcDamage";
+import clsx from "clsx";
+
+enum SortBy {
+  Normal,
+  Demons,
+  Undead,
+}
 
 const CompareHeader = () => (
   <div
@@ -30,20 +37,25 @@ export default function ComparisonList() {
     state.characterOtherEnhancedDamageSources,
   ]);
 
+  const [sortBy, setSortBy] = useState<SortBy>(SortBy.Normal);
+
   const sortedWeapons = useMemo(() => {
     if (
       characterCriticalStrikeChance &&
       characterDeadlyStrikeChance &&
       characterSkillWeaponDamagePercentage
     ) {
-      return weapons.sort((weaponA, weaponB) =>
-        sortWeaponsHighToLowDamage(
-          characterCriticalStrikeChance,
-          characterDeadlyStrikeChance,
-          weaponA,
-          weaponB
-        )
-      );
+      if (sortBy === SortBy.Normal) {
+        return weapons.sort((weaponA, weaponB) =>
+          sortWeaponsHighToLowDamage(
+            characterCriticalStrikeChance,
+            characterDeadlyStrikeChance,
+            weaponA,
+            weaponB
+          )
+        );
+      } else if (sortBy === SortBy.Demons) {
+      }
     } else {
       return weapons;
     }
@@ -54,11 +66,14 @@ export default function ComparisonList() {
     characterOtherEnhancedDamageSources,
   ]);
 
-  const SortButton = ({ text }: any) => {
+  const SortButton = ({ text, selected, onClick }: any) => {
     return (
       <button
-        className={"flex h-8 w-36 items-center justify-center bg-white"}
-        onClick={() => {}}
+        className={clsx(
+          "flex h-8 w-36 items-center justify-center bg-white",
+          selected ? "bg-red-400" : ""
+        )}
+        onClick={() => onClick()}
       >
         <span>{text}</span>
         <svg
@@ -98,9 +113,21 @@ export default function ComparisonList() {
           </h1>
 
           <div className={"flex flex-row items-center gap-2"}>
-            <SortButton text={"vs. Normal"} />
-            <SortButton text={"vs. Demons"} />
-            <SortButton text={"vs. Undead"} />
+            <SortButton
+              text={"vs. Normal"}
+              selected={sortBy === SortBy.Normal}
+              onClick={() => setSortBy(SortBy.Normal)}
+            />
+            <SortButton
+              text={"vs. Demons"}
+              selected={sortBy === SortBy.Demons}
+              onClick={() => setSortBy(SortBy.Demons)}
+            />
+            <SortButton
+              text={"vs. Undead"}
+              selected={sortBy === SortBy.Undead}
+              onClick={() => setSortBy(SortBy.Undead)}
+            />
           </div>
         </div>
 

@@ -7,7 +7,7 @@ interface Props {
   totalAvgDamage: string;
   enhancedDamageValues: number[];
 
-  chanceForDoubleDamage: number;
+  chanceForDoubleDamage: number | undefined;
 }
 
 export function FullDamageResult({
@@ -40,7 +40,9 @@ export function FullDamageResult({
       </div>
 
       <ul className={"mt-2 text-xs"}>
-        <li>+ {chanceForDoubleDamage}% 2x Damage</li>
+        {chanceForDoubleDamage && (
+          <li>+ {chanceForDoubleDamage.toFixed(0)}% 2x Damage</li>
+        )}
         {totalEnhancedDamage > 0 && (
           <li>+ {totalEnhancedDamage}% Enhanced Damage</li>
         )}
