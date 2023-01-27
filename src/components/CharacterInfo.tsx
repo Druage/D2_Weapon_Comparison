@@ -3,7 +3,10 @@ import { PLAYABLE_CHARACTERS } from "../data/data";
 import { useGlobalState } from "../state/useGlobalState";
 
 export function CharacterInfo() {
-  const setCharacter = useGlobalState((state) => state.setCharacter);
+  const [character, setCharacter] = useGlobalState((state) => [
+    state.character,
+    state.setCharacter,
+  ]);
   const [characterStrength, setCharacterStrength] = useGlobalState((state) => [
     state.characterStrength,
     state.setCharacterStrength,
@@ -37,6 +40,7 @@ export function CharacterInfo() {
         <select
           className={"h-10 w-full"}
           onChange={(event) => setCharacter(event.target.value as Character)}
+          defaultValue={character}
         >
           {PLAYABLE_CHARACTERS.map((it) => (
             <option value={it} key={it}>
@@ -54,6 +58,7 @@ export function CharacterInfo() {
           className={"h-10 w-full bg-white"}
           type={"number"}
           maxLength={3}
+          defaultValue={characterStrength}
           onChange={(event) => {
             setCharacterStrength(Number.parseInt(event.target.value));
           }}

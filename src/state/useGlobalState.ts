@@ -2,6 +2,7 @@ import create from "zustand";
 import { Weapon } from "../types/Weapon";
 import { FAKE_WEAPONS_TO_TEST } from "../data/data";
 import { Character } from "../types/Character";
+import { SortBy } from "../types/SortBy";
 
 interface State {
   character: Character;
@@ -14,6 +15,8 @@ interface State {
 
   weapons: Weapon[];
   characterCriticalStrikeChance: number | undefined;
+
+  sortBy: SortBy;
 }
 
 interface Actions {
@@ -26,6 +29,8 @@ interface Actions {
   addWeapon: (weapon: Weapon) => any;
   setCharacterCriticalStrikeChance: (chance: number) => void;
   setDeadlyStrikeChance: (chance: number) => void;
+
+  setSortBy: (sortBy: SortBy) => void;
 }
 
 export const useGlobalState = create<State & Actions>((set) => ({
@@ -40,6 +45,8 @@ export const useGlobalState = create<State & Actions>((set) => ({
   characterSkillWeaponDamagePercentage: undefined,
   characterOtherEnhancedDamageSources: [],
   characterDeadlyStrikeChange: undefined,
+
+  sortBy: SortBy.Normal,
 
   setCharacter: (character: Character) => set(() => ({ character: character })),
   setCharacterStrength: (strength: number) =>
@@ -58,4 +65,6 @@ export const useGlobalState = create<State & Actions>((set) => ({
 
   setCharacterOtherEnhancedDamageSources: (sources: number[]) =>
     set(() => ({ characterOtherEnhancedDamageSources: sources })),
+
+  setSortBy: (sortBy: SortBy) => set(() => ({ sortBy: sortBy })),
 }));

@@ -2,15 +2,14 @@ import WeaponItem from "./WeaponItem";
 import { useGlobalState } from "../state/useGlobalState";
 import { AddWeaponButton } from "./AddWeaponButton";
 import { CharacterInfo } from "./CharacterInfo";
-import { useMemo, useState } from "react";
-import { sortWeaponsHighToLowDamage } from "../utils/calcDamage";
+import { useMemo } from "react";
+import {
+  sortWeaponsHighToLowDamage,
+  sortWeaponsHighToLowDamageForDemons,
+  sortWeaponsHighToLowDamageForUndead,
+} from "../utils/calcDamage";
 import clsx from "clsx";
-
-enum SortBy {
-  Normal,
-  Demons,
-  Undead,
-}
+import { SortBy } from "../types/SortBy";
 
 const CompareHeader = () => (
   <div
@@ -30,6 +29,8 @@ export default function ComparisonList() {
     characterDeadlyStrikeChance,
     characterSkillWeaponDamagePercentage,
     characterOtherEnhancedDamageSources,
+    characterStrength,
+    characterDexterity,
   ] = useGlobalState((state) => [
     state.weapons,
     state.character,
@@ -37,15 +38,21 @@ export default function ComparisonList() {
     state.characterDeadlyStrikeChange,
     state.characterSkillWeaponDamagePercentage,
     state.characterOtherEnhancedDamageSources,
+    state.characterStrength,
+    state.characterDexterity,
   ]);
 
-  const [sortBy, setSortBy] = useState<SortBy>(SortBy.Normal);
+  const [sortBy, setSortBy] = useGlobalState((state) => [
+    state.sortBy,
+    state.setSortBy,
+  ]);
 
   const sortedWeapons = useMemo(() => {
     if (
       characterCriticalStrikeChance &&
       characterDeadlyStrikeChance &&
-      characterSkillWeaponDamagePercentage
+      characterSkillWeaponDamagePercentage &&
+      characterOtherEnhancedDamageSources
     ) {
       if (sortBy === SortBy.Normal) {
         return weapons.sort((weaponA, weaponB) =>
@@ -54,10 +61,41 @@ export default function ComparisonList() {
             characterCriticalStrikeChance,
             characterDeadlyStrikeChance,
             weaponA,
-            weaponB
+            weaponB,
+            characterSkillWeaponDamagePercentage,
+            characterOtherEnhancedDamageSources,
+            characterStrength ?? 0,
+            characterDexterity ?? 0
           )
         );
       } else if (sortBy === SortBy.Demons) {
+        return weapons.sort((weaponA, weaponB) =>
+          sortWeaponsHighToLowDamageForDemons(
+            character,
+            characterCriticalStrikeChance,
+            characterDeadlyStrikeChance,
+            weaponA,
+            weaponB,
+            characterSkillWeaponDamagePercentage,
+            characterOtherEnhancedDamageSources,
+            characterStrength ?? 0,
+            characterDexterity ?? 0
+          )
+        );
+      } else if (sortBy === SortBy.Undead) {
+        return weapons.sort((weaponA, weaponB) =>
+          sortWeaponsHighToLowDamageForUndead(
+            character,
+            characterCriticalStrikeChance,
+            characterDeadlyStrikeChance,
+            weaponA,
+            weaponB,
+            characterSkillWeaponDamagePercentage,
+            characterOtherEnhancedDamageSources,
+            characterStrength ?? 0,
+            characterDexterity ?? 0
+          )
+        );
       }
     } else {
       return weapons;
@@ -67,6 +105,7 @@ export default function ComparisonList() {
     characterDeadlyStrikeChance,
     characterSkillWeaponDamagePercentage,
     characterOtherEnhancedDamageSources,
+    sortBy,
   ]);
 
   const SortButton = ({ text, selected, onClick }: any) => {
@@ -74,7 +113,7 @@ export default function ComparisonList() {
       <button
         className={clsx(
           "flex h-8 w-36 items-center justify-center bg-white",
-          selected ? "bg-red-400" : ""
+          selected ? "border-4 border-violet-600 bg-red-400" : ""
         )}
         onClick={() => onClick()}
       >
@@ -135,7 +174,7 @@ export default function ComparisonList() {
         </div>
 
         {sortedWeapons?.map((it, index) => (
-          <WeaponItem key={index} simplified={false} weapon={it} />
+          <WeaponItem key={it.name} simplified={false} weapon={it} />
         ))}
       </div>
     </div>

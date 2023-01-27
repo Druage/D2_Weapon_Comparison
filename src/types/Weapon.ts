@@ -1,6 +1,8 @@
+import { WeaponKind } from "../utils/calcDamage";
+
 export interface Weapon {
   name: string;
-  type: "melee" | "ranged";
+  kind: WeaponKind;
   low: number;
   high: number;
   deadlyStrike: number;

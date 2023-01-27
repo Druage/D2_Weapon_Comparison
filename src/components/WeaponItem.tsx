@@ -2,6 +2,7 @@ import { Weapon } from "../types/Weapon";
 import { useGlobalState } from "../state/useGlobalState";
 import { useCalcDamage } from "../utils/useCalcDamage";
 import { FullDamageResult } from "./FullWeaponDamageResult";
+import { SortBy } from "../types/SortBy";
 
 interface Props {
   simplified: boolean;
@@ -14,12 +15,18 @@ export default function WeaponItem({ simplified, weapon }: Props) {
     characterDeadlyStrikeChance,
     characterSkillWeaponDamagePercentage,
     characterOtherEnhancedDamageSources,
+    characterStrength,
+    characterDexterity,
   ] = useGlobalState((state) => [
     state.characterCriticalStrikeChance,
     state.characterDeadlyStrikeChange,
     state.characterSkillWeaponDamagePercentage,
     state.characterOtherEnhancedDamageSources,
+    state.characterStrength,
+    state.characterDexterity,
   ]);
+
+  const sortBy = useGlobalState((state) => state.sortBy);
 
   const SimplifiedVersion = () => (
     <div className={"w-full bg-[#B0B0B0] p-1 text-center"}>
@@ -43,18 +50,22 @@ export default function WeaponItem({ simplified, weapon }: Props) {
     totalAvgDmgWithDemonsED,
     totalAvgDamageForUndead,
     realChanceForDoubleDmg,
+    enhancedDamageFromStrength,
+    enhancedDamageFromDexterity,
   ] = useCalcDamage(
     weapon,
     characterSkillWeaponDamagePercentage,
     characterOtherEnhancedDamageSources,
     characterCriticalStrikeChance,
-    characterDeadlyStrikeChance
+    characterDeadlyStrikeChance,
+    characterStrength,
+    characterDexterity
   );
 
   const ExpandedVersion = () => (
     <div
       className={
-        "flex h-72 w-full items-center justify-center gap-8 bg-blue-800 p-4"
+        "flex h-80 w-full items-center justify-center gap-8 bg-gray-900 p-4"
       }
     >
       <div
@@ -79,30 +90,39 @@ export default function WeaponItem({ simplified, weapon }: Props) {
       <div className={"flex h-full flex-1"}>
         <FullDamageResult
           className={"bg-white"}
+          highlight={sortBy === SortBy.Normal}
           heading={"vs. Normal"}
-          totalAvgDamage={totalAvgDamage?.toFixed(2)}
+          totalAvgDamage={totalAvgDamage}
           enhancedDamageValues={[...characterOtherEnhancedDamageSources]}
           chanceForDoubleDamage={realChanceForDoubleDmg}
+          enhancedDamageFromStrength={enhancedDamageFromStrength}
+          enhancedDamageFromDexterity={enhancedDamageFromDexterity}
         />
         <FullDamageResult
           className={"bg-red-900 text-white"}
+          highlight={sortBy === SortBy.Demons}
           heading={"vs. Demons"}
-          totalAvgDamage={totalAvgDmgWithDemonsED?.toFixed(2)}
+          totalAvgDamage={totalAvgDmgWithDemonsED}
           enhancedDamageValues={[
             ...characterOtherEnhancedDamageSources,
             weapon.demonED ?? 0,
           ]}
           chanceForDoubleDamage={realChanceForDoubleDmg}
+          enhancedDamageFromStrength={enhancedDamageFromStrength}
+          enhancedDamageFromDexterity={enhancedDamageFromDexterity}
         />
         <FullDamageResult
           className={"bg-black text-white"}
+          highlight={sortBy === SortBy.Undead}
           heading={"vs. Undead"}
-          totalAvgDamage={totalAvgDamageForUndead?.toFixed(2)}
+          totalAvgDamage={totalAvgDamageForUndead}
           enhancedDamageValues={[
             ...characterOtherEnhancedDamageSources,
             weapon.undeadED ?? 0,
           ]}
           chanceForDoubleDamage={realChanceForDoubleDmg}
+          enhancedDamageFromStrength={enhancedDamageFromStrength}
+          enhancedDamageFromDexterity={enhancedDamageFromDexterity}
         />
       </div>
     </div>

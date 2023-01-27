@@ -1,10 +1,11 @@
 import { Weapon } from "../types/Weapon";
 import { Character } from "../types/Character";
+import { WeaponKind } from "../utils/calcDamage";
 
 export const FAKE_WEAPONS_TO_TEST: Weapon[] = [
   {
     name: "Nats Claw (Max Dmg + Skull)",
-    type: "melee",
+    kind: WeaponKind.Claw,
     low: 120,
     high: 249,
     deadlyStrike: 0,
@@ -13,7 +14,7 @@ export const FAKE_WEAPONS_TO_TEST: Weapon[] = [
   },
   {
     name: "Nats Claw (Max Dmg + Lo)",
-    type: "melee",
+    kind: WeaponKind.Claw,
     low: 120,
     high: 249,
     deadlyStrike: 20,
@@ -22,7 +23,7 @@ export const FAKE_WEAPONS_TO_TEST: Weapon[] = [
   },
   {
     name: "Nats Claw (Max Dmg + Ohm)",
-    type: "melee",
+    kind: WeaponKind.Claw,
     low: 140,
     high: 274.5,
     deadlyStrike: 0,
@@ -31,7 +32,7 @@ export const FAKE_WEAPONS_TO_TEST: Weapon[] = [
   },
   {
     name: "Nats Claw (Lo, Lo, Ohm)",
-    type: "melee",
+    kind: WeaponKind.Claw,
     low: 140,
     high: 178.5,
     deadlyStrike: 40,
@@ -40,7 +41,7 @@ export const FAKE_WEAPONS_TO_TEST: Weapon[] = [
   },
   {
     name: "Nats Claw (Lo, Ohm, Ohm)",
-    type: "melee",
+    kind: WeaponKind.Claw,
     low: 160,
     high: 204,
     deadlyStrike: 20,
@@ -50,35 +51,35 @@ export const FAKE_WEAPONS_TO_TEST: Weapon[] = [
 
   {
     name: "Bartucs (Lo, Lo, Jah)",
-    type: "melee",
+    kind: WeaponKind.Claw,
     low: 97,
     high: 182,
     deadlyStrike: 40,
   },
   {
     name: "Bartucs (Max Dmg + Jah)",
-    type: "melee",
+    kind: WeaponKind.Claw,
     low: 97,
     high: 278,
     deadlyStrike: 0,
   },
   {
     name: "Bartucs (Lo, Ohm, Jah)",
-    type: "melee",
+    kind: WeaponKind.Claw,
     low: 109,
     high: 204,
     deadlyStrike: 20,
   },
   {
     name: "Bartucs (Ohm, Ohm, Jah)",
-    type: "melee",
+    kind: WeaponKind.Claw,
     low: 121,
     high: 226,
     deadlyStrike: 0,
   },
   {
     name: "Bartucs (Shael, Shael, Jah)",
-    type: "melee",
+    kind: WeaponKind.Claw,
     low: 97,
     high: 182,
     deadlyStrike: 0,
@@ -86,51 +87,57 @@ export const FAKE_WEAPONS_TO_TEST: Weapon[] = [
 
   {
     name: "Jade Talon (Shael, Shael, Jah)",
-    type: "melee",
+    kind: WeaponKind.Claw,
     low: 114,
     high: 152,
     deadlyStrike: 0,
   },
   {
     name: "Jade Talon (Ohm, Lo, Jah)",
-    type: "melee",
+    kind: WeaponKind.Claw,
     low: 131.92,
     high: 174.6,
     deadlyStrike: 20,
   },
   {
     name: "Jade Talon (Ohm, Ohm, Jah)",
-    type: "melee",
+    kind: WeaponKind.Claw,
     low: 148.92,
     high: 197.1,
     deadlyStrike: 0,
   },
   {
     name: "Jade Talon (Lo, Lo, Jah)",
-    type: "melee",
+    kind: WeaponKind.Claw,
     low: 114,
     high: 152,
     deadlyStrike: 40,
   },
   {
     name: "Jade Talon (Max Dmg + Jah, [Perfect])",
-    type: "melee",
+    kind: WeaponKind.Claw,
     low: 114,
     high: 248,
     deadlyStrike: 0,
   },
   {
     name: "Jade Talon (Max Dmg + Jah, [Mine])",
-    type: "melee",
+    kind: WeaponKind.Claw,
     low: 104,
     high: 234.6,
     deadlyStrike: 0,
   },
 
-  { name: "Fury Claw", type: "melee", low: 120, high: 160, deadlyStrike: 33 },
+  {
+    name: "Fury Claw",
+    kind: WeaponKind.Claw,
+    low: 120,
+    high: 160,
+    deadlyStrike: 33,
+  },
   {
     name: "Grief",
-    type: "melee",
+    kind: WeaponKind.Sword,
     low: 350,
     high: 383,
     deadlyStrike: 20,
