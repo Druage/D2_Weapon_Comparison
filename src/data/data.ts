@@ -1,6 +1,6 @@
 import { Weapon } from "../types/Weapon";
 import { Character } from "../types/Character";
-import { WeaponKind } from "../utils/calcDamage";
+import { WeaponKind } from "../types/WeaponKind";
 
 export const FAKE_WEAPONS_TO_TEST: Weapon[] = [
   {

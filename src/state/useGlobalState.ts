@@ -11,7 +11,7 @@ interface State {
   characterSkillWeaponDamagePercentage: number | undefined;
   characterOtherEnhancedDamageSources: number[];
 
-  characterDeadlyStrikeChange: number | undefined;
+  characterDeadlyStrikeChance: number | undefined;
 
   weapons: Weapon[];
   characterCriticalStrikeChance: number | undefined;
@@ -37,14 +37,14 @@ export const useGlobalState = create<State & Actions>((set) => ({
   weapons: [...FAKE_WEAPONS_TO_TEST],
   addWeapon: (weapon: Weapon) =>
     set((state) => ({ weapons: [...state.weapons, weapon] })),
-  characterCriticalStrikeChance: undefined,
+  characterCriticalStrikeChance: 0,
 
   character: Character.UNKNOWN,
-  characterStrength: undefined,
-  characterDexterity: undefined,
-  characterSkillWeaponDamagePercentage: undefined,
-  characterOtherEnhancedDamageSources: [],
-  characterDeadlyStrikeChange: undefined,
+  characterStrength: 0,
+  characterDexterity: 0,
+  characterSkillWeaponDamagePercentage: 1.0,
+  characterOtherEnhancedDamageSources: [0],
+  characterDeadlyStrikeChance: 0,
 
   sortBy: SortBy.Normal,
 
@@ -58,7 +58,7 @@ export const useGlobalState = create<State & Actions>((set) => ({
     set(() => ({ characterCriticalStrikeChance: chance })),
 
   setDeadlyStrikeChance: (chance: number) =>
-    set(() => ({ characterDeadlyStrikeChange: chance })),
+    set(() => ({ characterDeadlyStrikeChance: chance })),
 
   setCharacterSkillWeaponDamagePercentage: (percentage: number) =>
     set(() => ({ characterSkillWeaponDamagePercentage: percentage })),

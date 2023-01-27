@@ -11,24 +11,34 @@ export function CharacterInfo() {
     state.characterStrength,
     state.setCharacterStrength,
   ]);
-  const setCharacterDexterity = useGlobalState(
-    (state) => state.setCharacterDexterity
+  const [characterDexterity, setCharacterDexterity] = useGlobalState(
+    (state) => [state.characterDexterity, state.setCharacterDexterity]
   );
 
-  const setCriticalStrikeChance = useGlobalState(
-    (state) => state.setCharacterCriticalStrikeChance
-  );
-  const setDeadlyStrikeChance = useGlobalState(
-    (state) => state.setDeadlyStrikeChance
-  );
-
-  const setCharacterSkillWeaponDamagePercentage = useGlobalState(
-    (state) => state.setCharacterSkillWeaponDamagePercentage
+  const [characterCriticalStrikeChance, setCriticalStrikeChance] =
+    useGlobalState((state) => [
+      state.characterCriticalStrikeChance,
+      state.setCharacterCriticalStrikeChance,
+    ]);
+  const [characterDeadlyStrikeChance, setDeadlyStrikeChance] = useGlobalState(
+    (state) => [state.characterDeadlyStrikeChance, state.setDeadlyStrikeChance]
   );
 
-  const setCharacterOtherEnhancedDamageSources = useGlobalState(
-    (state) => state.setCharacterOtherEnhancedDamageSources
-  );
+  const [
+    characterSkillWeaponDamagePercentage,
+    setCharacterSkillWeaponDamagePercentage,
+  ] = useGlobalState((state) => [
+    state.characterSkillWeaponDamagePercentage,
+    state.setCharacterSkillWeaponDamagePercentage,
+  ]);
+
+  const [
+    characterOtherEnhancedDamageSources,
+    setCharacterOtherEnhancedDamageSources,
+  ] = useGlobalState((state) => [
+    state.characterOtherEnhancedDamageSources,
+    state.setCharacterOtherEnhancedDamageSources,
+  ]);
 
   return (
     <div className={"flex flex-1 items-center justify-end gap-6"}>
@@ -57,7 +67,8 @@ export function CharacterInfo() {
         <input
           className={"h-10 w-full bg-white"}
           type={"number"}
-          maxLength={3}
+          min={0}
+          max={999}
           defaultValue={characterStrength}
           onChange={(event) => {
             setCharacterStrength(Number.parseInt(event.target.value));
@@ -72,6 +83,9 @@ export function CharacterInfo() {
         <input
           className={"h-10 w-full bg-white"}
           type={"number"}
+          min={0}
+          max={999}
+          defaultValue={characterDexterity}
           onChange={(event) =>
             setCharacterDexterity(Number.parseInt(event.target.value))
           }
@@ -85,6 +99,9 @@ export function CharacterInfo() {
         <input
           className={"h-10 w-full bg-white"}
           type={"number"}
+          min={0}
+          max={999}
+          defaultValue={characterCriticalStrikeChance}
           onChange={(event) =>
             setCriticalStrikeChance(Number.parseInt(event.target.value))
           }
@@ -98,6 +115,9 @@ export function CharacterInfo() {
         <input
           className={"h-10 w-full bg-white"}
           type={"number"}
+          min={0}
+          max={999}
+          defaultValue={characterDeadlyStrikeChance}
           onChange={(event) =>
             setDeadlyStrikeChance(Number.parseInt(event.target.value))
           }
@@ -111,6 +131,9 @@ export function CharacterInfo() {
         <input
           className={"h-10 w-full bg-white"}
           type={"number"}
+          min={0}
+          max={999}
+          defaultValue={characterSkillWeaponDamagePercentage}
           onChange={(event) =>
             setCharacterSkillWeaponDamagePercentage(
               Number.parseInt(event.target.value)
@@ -126,6 +149,9 @@ export function CharacterInfo() {
         <input
           className={"h-10 w-full bg-white"}
           type={"number"}
+          min={0}
+          max={999}
+          defaultValue={characterOtherEnhancedDamageSources[0]}
           onChange={(event) =>
             setCharacterOtherEnhancedDamageSources([
               Number.parseInt(event.target.value),

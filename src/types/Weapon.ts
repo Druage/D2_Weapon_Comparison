@@ -1,8 +1,8 @@
-import { WeaponKind } from "../utils/calcDamage";
+import { WeaponKind } from "./WeaponKind";
 
 export interface Weapon {
   name: string;
-  kind: WeaponKind;
+  type?: WeaponKind;
   low: number;
   high: number;
   deadlyStrike: number;

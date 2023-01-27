@@ -19,7 +19,7 @@ export default function WeaponItem({ simplified, weapon }: Props) {
     characterDexterity,
   ] = useGlobalState((state) => [
     state.characterCriticalStrikeChance,
-    state.characterDeadlyStrikeChange,
+    state.characterDeadlyStrikeChance,
     state.characterSkillWeaponDamagePercentage,
     state.characterOtherEnhancedDamageSources,
     state.characterStrength,

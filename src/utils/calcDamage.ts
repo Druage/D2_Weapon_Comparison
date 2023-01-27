@@ -1,4 +1,5 @@
 import { Weapon } from "../types/Weapon";
+import { WeaponKind } from "../types/WeaponKind";
 
 export function calcDoubleDamageChance(
   critChance: number,
@@ -21,27 +22,6 @@ export function calcAvgDamageWithDoubleDamageChance(
 }
 
 // Str, Dex, Weapon Type "melee" | "ranged"
-export enum WeaponKind {
-  Sword,
-  Axe,
-  Dagger,
-  Mace,
-  Hammer,
-  Club,
-  ThunderStump,
-  Claw,
-  AmazonSpear,
-  Bow,
-  Crossbow,
-  AmazonJavelin,
-  Throwing,
-  Polearm,
-  Spear,
-  Scepter,
-  Stave,
-  Wand,
-  Orb,
-}
 
 export function calcStrAndDexEnhancedDamageRatio(
   weaponKind: WeaponKind
@@ -313,9 +293,13 @@ export function sortWeaponsHighToLowDamageForDemons(
   characterStrength: number,
   characterDexterity: number
 ) {
-  const [strRatioA, dexRatioA] = calcStrAndDexEnhancedDamageRatio(weaponA.kind);
+  const [strRatioA, dexRatioA] = calcStrAndDexEnhancedDamageRatio(
+    weaponA.type!
+  );
 
-  const [strRatioB, dexRatioB] = calcStrAndDexEnhancedDamageRatio(weaponB.kind);
+  const [strRatioB, dexRatioB] = calcStrAndDexEnhancedDamageRatio(
+    weaponB.type!
+  );
 
   const [totalLowDmgA, totalHighDmgA] = calcTotalWeaponDamage(
     weaponA.low,
@@ -392,9 +376,13 @@ export function sortWeaponsHighToLowDamageForUndead(
   characterStrength: number,
   characterDexterity: number
 ) {
-  const [strRatioA, dexRatioA] = calcStrAndDexEnhancedDamageRatio(weaponA.kind);
+  const [strRatioA, dexRatioA] = calcStrAndDexEnhancedDamageRatio(
+    weaponA.type!
+  );
 
-  const [strRatioB, dexRatioB] = calcStrAndDexEnhancedDamageRatio(weaponB.kind);
+  const [strRatioB, dexRatioB] = calcStrAndDexEnhancedDamageRatio(
+    weaponB.type!
+  );
 
   const [totalLowDmgA, totalHighDmgA] = calcTotalWeaponDamage(
     weaponA.low,
@@ -471,9 +459,13 @@ export function sortWeaponsHighToLowDamage(
   characterStrength: number,
   characterDexterity: number
 ) {
-  const [strRatioA, dexRatioA] = calcStrAndDexEnhancedDamageRatio(weaponA.kind);
+  const [strRatioA, dexRatioA] = calcStrAndDexEnhancedDamageRatio(
+    weaponA.type!
+  );
 
-  const [strRatioB, dexRatioB] = calcStrAndDexEnhancedDamageRatio(weaponA.kind);
+  const [strRatioB, dexRatioB] = calcStrAndDexEnhancedDamageRatio(
+    weaponA.type!
+  );
 
   const [totalLowDmgA, totalHighDmgA] = calcTotalWeaponDamage(
     weaponA.low,
@@ -525,7 +517,7 @@ export function test_dmg() {
   const weaponsToTest: Weapon[] = [
     {
       name: "Nats Claw (Max Dmg + Skull)",
-      kind: WeaponKind.Claw,
+      type: WeaponKind.Claw,
       low: 120,
       high: 249,
       deadlyStrike: 0,
@@ -534,7 +526,7 @@ export function test_dmg() {
     },
     {
       name: "Nats Claw (Max Dmg + Lo)",
-      kind: WeaponKind.Claw,
+      type: WeaponKind.Claw,
       low: 120,
       high: 249,
       deadlyStrike: 20,
@@ -543,7 +535,7 @@ export function test_dmg() {
     },
     {
       name: "Nats Claw (Max Dmg + Ohm)",
-      kind: WeaponKind.Claw,
+      type: WeaponKind.Claw,
       low: 140,
       high: 274.5,
       deadlyStrike: 0,
@@ -552,7 +544,7 @@ export function test_dmg() {
     },
     {
       name: "Nats Claw (Lo, Lo, Ohm)",
-      kind: WeaponKind.Claw,
+      type: WeaponKind.Claw,
       low: 140,
       high: 178.5,
       deadlyStrike: 40,
@@ -561,7 +553,7 @@ export function test_dmg() {
     },
     {
       name: "Nats Claw (Lo, Ohm, Ohm)",
-      kind: WeaponKind.Claw,
+      type: WeaponKind.Claw,
       low: 160,
       high: 204,
       deadlyStrike: 20,
@@ -571,35 +563,35 @@ export function test_dmg() {
 
     {
       name: "Bartucs (Lo, Lo, Jah)",
-      kind: WeaponKind.Claw,
+      type: WeaponKind.Claw,
       low: 97,
       high: 182,
       deadlyStrike: 40,
     },
     {
       name: "Bartucs (Max Dmg + Jah)",
-      kind: WeaponKind.Claw,
+      type: WeaponKind.Claw,
       low: 97,
       high: 278,
       deadlyStrike: 0,
     },
     {
       name: "Bartucs (Lo, Ohm, Jah)",
-      kind: WeaponKind.Claw,
+      type: WeaponKind.Claw,
       low: 109,
       high: 204,
       deadlyStrike: 20,
     },
     {
       name: "Bartucs (Ohm, Ohm, Jah)",
-      kind: WeaponKind.Claw,
+      type: WeaponKind.Claw,
       low: 121,
       high: 226,
       deadlyStrike: 0,
     },
     {
       name: "Bartucs (Shael, Shael, Jah)",
-      kind: WeaponKind.Claw,
+      type: WeaponKind.Claw,
       low: 97,
       high: 182,
       deadlyStrike: 0,
@@ -607,42 +599,42 @@ export function test_dmg() {
 
     {
       name: "Jade Talon (Shael, Shael, Jah)",
-      kind: WeaponKind.Claw,
+      type: WeaponKind.Claw,
       low: 114,
       high: 152,
       deadlyStrike: 0,
     },
     {
       name: "Jade Talon (Ohm, Lo, Jah)",
-      kind: WeaponKind.Claw,
+      type: WeaponKind.Claw,
       low: 131.92,
       high: 174.6,
       deadlyStrike: 20,
     },
     {
       name: "Jade Talon (Ohm, Ohm, Jah)",
-      kind: WeaponKind.Claw,
+      type: WeaponKind.Claw,
       low: 148.92,
       high: 197.1,
       deadlyStrike: 0,
     },
     {
       name: "Jade Talon (Lo, Lo, Jah)",
-      kind: WeaponKind.Claw,
+      type: WeaponKind.Claw,
       low: 114,
       high: 152,
       deadlyStrike: 40,
     },
     {
       name: "Jade Talon (Max Dmg + Jah, [Perfect])",
-      kind: WeaponKind.Claw,
+      type: WeaponKind.Claw,
       low: 114,
       high: 248,
       deadlyStrike: 0,
     },
     {
       name: "Jade Talon (Max Dmg + Jah, [Mine])",
-      kind: WeaponKind.Claw,
+      type: WeaponKind.Claw,
       low: 104,
       high: 234.6,
       deadlyStrike: 0,
@@ -650,7 +642,7 @@ export function test_dmg() {
 
     {
       name: "Fury Claw",
-      kind: WeaponKind.Claw,
+      type: WeaponKind.Claw,
       low: 120,
       high: 160,
       deadlyStrike: 33,

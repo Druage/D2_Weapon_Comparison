@@ -35,7 +35,7 @@ export default function ComparisonList() {
     state.weapons,
     state.character,
     state.characterCriticalStrikeChance,
-    state.characterDeadlyStrikeChange,
+    state.characterDeadlyStrikeChance,
     state.characterSkillWeaponDamagePercentage,
     state.characterOtherEnhancedDamageSources,
     state.characterStrength,

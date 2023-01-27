@@ -5,8 +5,8 @@ import {
   calcDoubleDamageChance,
   calcStrAndDexEnhancedDamageRatio,
   calcTotalWeaponDamage,
-  WeaponKind,
 } from "../src/utils/calcDamage";
+import { WeaponKind } from "../src/types/WeaponKind";
 
 test("calcAvgDamage", () => {
   expect(calcAvgDmg(50, 100)).toEqual(75);
